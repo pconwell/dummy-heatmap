@@ -1,4 +1,4 @@
-read.csv(file, header=TRUE, stringsAsFactors = FALSE)
+df <- read.csv([file_here], header=TRUE, stringsAsFactors = FALSE)
 
 CrashesByWeek <- function(c){
   
@@ -23,3 +23,5 @@ CrashesByWeek <- function(c){
     ylab('Hour (time) of Day') + 
     theme(panel.background = element_rect(fill = 'white'))
 }
+
+CrashesByWeek(df)
