@@ -1,4 +1,7 @@
-df <- read.csv([file_here], header=TRUE, stringsAsFactors = FALSE)
+library(lubridate)
+library(ggplot2)
+library(scales)
+
 
 CrashesByWeek <- function(c){
   
@@ -24,4 +27,10 @@ CrashesByWeek <- function(c){
     theme(panel.background = element_rect(fill = 'white'))
 }
 
-CrashesByWeek(df)
+crashes <- read.csv("./crashes.csv", header=TRUE, stringsAsFactors = FALSE)
+
+crashes$collision_date <- strptime(crashes$collision_date, format = '%m/%d/%Y %H:%M')
+crashes$weekday <- weekdays(as.Date(crashes$collision_date))
+crashes$hour <- hour(crashes$collision_date)
+
+CrashesByWeek(crashes)
