@@ -5,12 +5,11 @@ library(scales)
 
 CrashesByWeek <- function(c){
   
-  c$collision_date <- strptime(c$collision_date, format = '%Y-%m-%d %H:%M:%S')
-  
   c$hour <- hour(c$collision_date)
   c$day <- weekdays(c$collision_date)
   
   t <- as.data.frame(table(c$day, c$hour))
+  View(t)
   
   names(t) <- c('day', 'hour', 'Crashes')
   
@@ -28,9 +27,6 @@ CrashesByWeek <- function(c){
 }
 
 crashes <- read.csv("./crashes.csv", header=TRUE, stringsAsFactors = FALSE)
-
 crashes$collision_date <- strptime(crashes$collision_date, format = '%m/%d/%Y %H:%M')
-crashes$weekday <- weekdays(as.Date(crashes$collision_date))
-crashes$hour <- hour(crashes$collision_date)
 
 CrashesByWeek(crashes)
